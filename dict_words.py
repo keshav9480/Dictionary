@@ -10,16 +10,19 @@ class Dictionary:
 
     def insert_word(self, word):
         if word:
-            self.dict.insert(word)
-            print("word inserted: ",word)
+            if not self.dict.search(word):
+                self.dict.insert(word)
+                print("word inserted: ",word)
+            else:
+                print("word '{}' already present".format(word))
         
     def delete_word(self, word):
         if self.dict.search(word):
-            self.dict.delete(word)
+            self.dict.delete_helper(word)
+            print("word '{}' deleted".format(word))
         else:
-            print("word '{}' not present in dictionart".format(word))
+            print("word '{}' not present in dictionary".format(word))
     
-        
     def get_sorted_words(self):
         word_list = []
         word_list = self.dict.display()
@@ -27,15 +30,14 @@ class Dictionary:
         for word in word_list:
             print(word)
 
-        
-
-
 if __name__ == '__main__':
     dictionary = Dictionary()
-    keys = ["abc"]
+    keys = ["abcd","ab"]
     for key in keys:
         dictionary.insert_word(key)
 
+    dictionary.get_sorted_words()
+    dictionary.delete_word("abcd")
     dictionary.get_sorted_words()
 
         
