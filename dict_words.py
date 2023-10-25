@@ -32,12 +32,12 @@ class Dictionary:
 
 if __name__ == '__main__':
     dictionary = Dictionary()
-    keys = ["abcd","ab"]
+    keys = ["keshav", "kesh"]
     for key in keys:
         dictionary.insert_word(key)
 
     dictionary.get_sorted_words()
-    dictionary.delete_word("abcd")
+    dictionary.delete_word("kesh")
     dictionary.get_sorted_words()
 
         
