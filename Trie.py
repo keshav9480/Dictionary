@@ -21,8 +21,16 @@ class Trie:
         
         return False
 
+    def  __toLowerCase(self, word):
+        return word.lower()
+    
+    def __toCapitalize(self, word):
+        return word.capitalize()
+
     def insert(self, word):
         crawlTrie = self.root
+
+        word = self.__toLowerCase(word)
         for level in range(len(word)):
             idx = self.__char_to_index(word[level])
             if not crawlTrie.children[idx]:
@@ -33,6 +41,8 @@ class Trie:
     
     def delete_helper(self,word):
         crawlTrie = self.root
+        
+        word = self.__toLowerCase(word)
         rc = self.delete(crawlTrie, word, 0)
     
     def delete(self, root, word, depth):
@@ -66,6 +76,7 @@ class Trie:
 
     def search(self, word):
         crawlWord = self.root
+        word = self.__toLowerCase(word)
         for lvl in range(len(word)):
             idx = self.__char_to_index(word[lvl])
             if crawlWord.children[idx] == None:
@@ -89,7 +100,7 @@ class Trie:
                     str=str[0:len(str)-1]
                 else:
                     if str not in visited:
-                        visited.append(str)
+                        visited.append(self.__toCapitalize(str))
                     if self.__hasChild(node.children[index]):
                         self._display_util(node.children[index], visited, str)
                         str = str[0:len(str)-1]
@@ -103,10 +114,3 @@ class Trie:
         self._display_util(crawlTrie, visited, str)
         return visited if len(visited) else []
 
-
-
-
-
-
-
-            

@@ -32,13 +32,15 @@ class Dictionary:
 
 if __name__ == '__main__':
     dictionary = Dictionary()
-    keys = ["keshav", "kesh"]
+    keys = ["Kerala","Tamilnadu","Andrapradesh","Karnataka","Maharastra",
+            "Jharkhand","Westbengal","MadhyaPradesh","Goa","Gujarath","Delhi","Punjab","Sikkim","Nagaland",
+            "Mizoram","Tripura","Himachalpradesh","Rajasthan","Haryana","Bihar","Chattisgarh",
+            "Assam","Telangana","Uttarakhand","Arunachalpradesh","Megalaya","Manipur"]
     for key in keys:
         dictionary.insert_word(key)
 
     dictionary.get_sorted_words()
-    dictionary.delete_word("kesh")
-    dictionary.get_sorted_words()
+   
 
         
 
