@@ -4,7 +4,7 @@ class TrieNode:
     def __init__(self):
         self.children = [None]*26
         self.isWordEnd = False
-        self.example = None
+        self.examples = [None]
 
 class Trie:
 
@@ -27,7 +27,7 @@ class Trie:
     def __toCapitalize(self, word):
         return word.capitalize()
 
-    def insert(self, word):
+    def insert(self, word, examples):
         crawlTrie = self.root
 
         word = self.__toLowerCase(word)
@@ -37,6 +37,9 @@ class Trie:
                 crawlTrie.children[idx] = TrieNode()
             if level == len(word)-1:
                 crawlTrie.isWordEnd = True
+                for eg in examples:
+                    crawlTrie.examples.append(eg)
+
             crawlTrie = crawlTrie.children[idx]
     
     def delete_helper(self,word):
@@ -89,6 +92,19 @@ class Trie:
 
         return False
     
+    def get_word_example(self, word):
+        crawlWord = self.root
+        word = self.__toLowerCase(word)
+        
+        if self.search(word):
+            for lvl in range(lvl(word)):
+                idx = self.__char_to_index(word[lvl])
+                if lvl == len(word)-1:
+                    if crawlWord.isWordEnd == True:
+                        return crawlWord.examples
+                crawlWord = crawlWord.children[idx]
+        return []
+
     def _display_util(self, node, visited, str):
         index = 0
         while index < 26:
@@ -100,7 +116,7 @@ class Trie:
                     str=str[0:len(str)-1]
                 else:
                     if str not in visited:
-                        visited.append(self.__toCapitalize(str))
+                        visited.append({self.__toCapitalize(str): node.examples})
                     if self.__hasChild(node.children[index]):
                         self._display_util(node.children[index], visited, str)
                         str = str[0:len(str)-1]

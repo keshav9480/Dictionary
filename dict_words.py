@@ -1,17 +1,16 @@
 import os
 from Trie import Trie
 
-'''
-program to sort the words from the given file
-'''
+
+
 class Dictionary:
     def __init__(self):
         self.dict = Trie()
 
-    def insert_word(self, word):
+    def insert_word(self, word, examples):
         if word:
             if not self.dict.search(word):
-                self.dict.insert(word)
+                self.dict.insert(word, examples)
                 print("word inserted: ",word)
             else:
                 print("word '{}' already present".format(word))
@@ -28,7 +27,11 @@ class Dictionary:
         word_list = self.dict.display()
         print("sorted list of words")
         for word in word_list:
-            print(word)
+            for wrd, examples in word.items():
+                print(wrd)
+                for eg in examples:
+                    if eg:
+                        print("\t\t\t\t - ",eg)
 
 if __name__ == '__main__':
     dictionary = Dictionary()
@@ -37,7 +40,7 @@ if __name__ == '__main__':
             "Mizoram","Tripura","Himachalpradesh","Rajasthan","Haryana","Bihar","Chattisgarh",
             "Assam","Telangana","Uttarakhand","Arunachalpradesh","Megalaya","Manipur"]
     for key in keys:
-        dictionary.insert_word(key)
+        dictionary.insert_word(key, ["just an example", "another example"])
 
     dictionary.get_sorted_words()
    
