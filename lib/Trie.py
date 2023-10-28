@@ -1,4 +1,4 @@
-from utilities.util import char_to_index, hasChild, toLowerCase, toCapitalize
+from utilities.utils import char_to_index, hasChild, toLowerCase, toCapitalize
 
 
 class TrieNode:
@@ -90,6 +90,9 @@ class Trie:
                         return crawlWord.examples
                 crawlWord = crawlWord.children[idx]
         return []
+    
+    def get_node(self):
+        return self.root
 
     def _display_util(self, node, visited, str):
         index = 0

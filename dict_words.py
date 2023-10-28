@@ -1,6 +1,6 @@
-import os
-from Trie import Trie
-
+import os, sys
+from lib.Trie import Trie
+from services.prefix_search import PrefixSearch
 
 
 class Dictionary:
@@ -32,9 +32,23 @@ class Dictionary:
                 for eg in examples:
                     if eg:
                         print("\t\t\t\t - ",eg)
+    
+    def get_auto_suggestions(self, key):
+        node = self.dict.get_node()
+        prefix_search = PrefixSearch()
+        words = prefix_search.auto_suggestion(node, key)
+
+        print("words suggested for key: ",key)
+        for wrd in words:
+            print(wrd)
+
+
 
 if __name__ == '__main__':
+
     dictionary = Dictionary()
+    
+
     keys = ["Kerala","Tamilnadu","Andrapradesh","Karnataka","Maharastra",
             "Jharkhand","Westbengal","MadhyaPradesh","Goa","Gujarath","Delhi","Punjab","Sikkim","Nagaland",
             "Mizoram","Tripura","Himachalpradesh","Rajasthan","Haryana","Bihar","Chattisgarh",
@@ -43,6 +57,8 @@ if __name__ == '__main__':
         dictionary.insert_word(key, ["just an example", "another example"])
 
     dictionary.get_sorted_words()
+
+    dictionary.get_auto_suggestions("A")
    
 
         
