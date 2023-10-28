@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     dictionary.get_sorted_words()
 
-    dictionary.get_auto_suggestions("A")
+    dictionary.get_auto_suggestions("Te")
    
 
         
